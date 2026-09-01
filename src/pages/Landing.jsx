@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import { CATALOG_ITEMS, FAQ, PRICE_MXN } from "../data/config.js";
+import heroSunrise from "../assets/hero-sunrise.jpg";
 import "./Landing.css";
 
 export default function Landing() {
   return (
     <div className="landing">
-      <Header />
+      <div
+        className="page-backdrop"
+        style={{ backgroundImage: `url(${heroSunrise})` }}
+        aria-hidden="true"
+      >
+        <div className="page-backdrop__scrim" />
+      </div>
 
       <section className="hero">
-        <div className="hero__glow" aria-hidden="true" />
+        <Header overlay />
         <div className="container hero__inner">
           <h1 className="hero__title">
             Meditaciones guiadas y música binaural para tu transformación

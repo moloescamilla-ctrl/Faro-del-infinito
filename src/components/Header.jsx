@@ -1,15 +1,25 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-export default function Header() {
+export default function Header({ overlay = false }) {
   return (
-    <header className="site-header">
+    <header className={overlay ? "site-header site-header--overlay" : "site-header"}>
       <div className="container site-header__inner">
         <Link to="/" className="brand">
-          <svg viewBox="0 0 40 40" className="brand__mark" aria-hidden="true">
-            <circle cx="20" cy="20" r="19" fill="#2a2440" />
-            <circle cx="20" cy="15" r="6.2" fill="#f3b65e" />
-            <path d="M13 35 L16.5 21 L23.5 21 L27 35 Z" fill="#f8f4ec" />
+          <svg
+            viewBox="0 0 24 32"
+            className="brand__mark"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M9.5 8h5l2.5 20h-10z" />
+            <path d="M8.3 13h7.4M7.6 17.5h8.8" />
+            <path d="M9 8V4.5h6V8" />
+            <path d="M4 6.5l2.3 1.3M20 6.5l-2.3 1.3" />
           </svg>
           <span className="brand__word">Faro del Infinito</span>
         </Link>

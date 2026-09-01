@@ -1,43 +1,64 @@
-.hero {
+.landing {
   position: relative;
-  overflow: hidden;
-  padding: 64px 0 88px;
 }
 
-.hero__glow {
+/* Imagen fija de fondo: cubre todo el documento, el contenido hace scroll
+   por encima. position:fixed en vez de background-attachment:fixed porque
+   este último es poco fiable en Safari/iOS. */
+.page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: #101a2e;
+}
+
+.page-backdrop__scrim {
   position: absolute;
-  top: -220px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 620px;
-  background: radial-gradient(
-    ellipse at center,
-    var(--ember-soft) 0%,
-    rgba(246, 230, 207, 0.35) 45%,
-    rgba(246, 230, 207, 0) 72%
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 20, 36, 0.55) 0%,
+    rgba(16, 20, 36, 0.22) 34%,
+    rgba(16, 20, 36, 0.4) 68%,
+    rgba(16, 20, 36, 0.62) 100%
   );
-  pointer-events: none;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero__inner {
   position: relative;
-  max-width: 720px;
+  z-index: 1;
+  max-width: 760px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
+  align-items: center;
+  gap: 26px;
+  text-align: center;
+  padding: 120px 24px 64px;
 }
 
 .hero__title {
-  font-size: clamp(32px, 5vw, 52px);
+  font-size: clamp(34px, 5.4vw, 56px);
   letter-spacing: -0.01em;
+  color: #fff;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
 }
 
 .hero__subtitle {
   font-size: 18px;
-  color: var(--text-muted);
-  max-width: 56ch;
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 52ch;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.3);
 }
 
 .hero__cta {
@@ -45,7 +66,13 @@
 }
 
 .catalog {
-  padding: 24px 0 72px;
+  position: relative;
+  z-index: 1;
+  padding: 56px 0 72px;
+  background: rgba(248, 244, 236, 0.8);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-top: 1px solid rgba(227, 219, 201, 0.6);
 }
 
 .catalog__list {
@@ -70,14 +97,18 @@
   height: 9px;
   margin-top: 9px;
   border-radius: 50%;
-  background: var(--ember);
+  background: var(--accent);
 }
 
 .faq {
+  position: relative;
+  z-index: 1;
   padding: 72px 0;
-  background: var(--bg-alt);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  background: rgba(241, 234, 217, 0.8);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-top: 1px solid rgba(227, 219, 201, 0.6);
+  border-bottom: 1px solid rgba(227, 219, 201, 0.6);
 }
 
 .faq__title {
@@ -132,8 +163,13 @@
 }
 
 .closing {
+  position: relative;
+  z-index: 1;
   padding: 88px 0;
   text-align: center;
+  background: rgba(248, 244, 236, 0.8);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 .closing__inner {
@@ -153,8 +189,13 @@
 }
 
 .site-footer {
-  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(227, 219, 201, 0.6);
   padding: 28px 0 100px;
+  background: rgba(248, 244, 236, 0.8);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 .site-footer__inner {
