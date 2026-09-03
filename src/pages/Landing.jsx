@@ -1,61 +1,111 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header.jsx";
-import { CATALOG_ITEMS, FAQ, PRICE_MXN } from "../data/config.js";
+import CategoryIcon from "../components/CategoryIcon.jsx";
+import useReveal from "../components/useReveal.js";
+import { CATEGORIES, FAQ, PRICE_MXN } from "../data/config.js";
 import heroSunrise from "../assets/hero-sunrise.jpg";
 import "./Landing.css";
 
 export default function Landing() {
+  useReveal();
+
   return (
     <div className="landing">
       <div
         className="page-backdrop"
         style={{ backgroundImage: `url(${heroSunrise})` }}
         aria-hidden="true"
-      >
-        <div className="page-backdrop__scrim" />
-      </div>
+      />
 
       <section className="hero">
         <Header overlay />
         <div className="container hero__inner">
-          <h1 className="hero__title">
-            Meditaciones guiadas y música binaural para tu transformación
-            interior
-          </h1>
+          <p className="eyebrow eyebrow--light">
+            Catálogo digital · pago único ${PRICE_MXN} MXN
+          </p>
+          <h1 className="hero__title">Un espacio de calma que crece contigo</h1>
           <p className="hero__subtitle">
-            Un catálogo en crecimiento, grabado por mí, organizado para
-            acompañarte en cada etapa de tu proceso de conciencia y
+            Meditaciones guiadas y música binaural grabadas por mí, organizadas
+            para acompañarte en cada etapa de tu proceso de conciencia y
             bienestar.
           </p>
-          <Link to="/pago" className="btn btn-primary hero__cta">
-            Quiero mi acceso — pago único ${PRICE_MXN} MXN
-          </Link>
+          <div className="hero__ctas">
+            <Link to="/pago" className="btn-white">
+              Quiero mi acceso <span className="btn-white__price">— ${PRICE_MXN} MXN</span>
+            </Link>
+            <a href="#faq" className="link-ghost">
+              Ver preguntas frecuentes
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="catalog">
+      <section className="categories">
         <div className="container">
-          <p className="eyebrow">Qué incluye</p>
-          <ul className="catalog__list">
-            {CATALOG_ITEMS.map((item) => (
-              <li key={item} className="catalog__item">
-                <span className="catalog__dot" aria-hidden="true" />
-                <span>{item}</span>
-              </li>
+          <div className="section-head reveal">
+            <p className="eyebrow eyebrow--light">Qué incluye tu acceso</p>
+            <h2>Cinco caminos, un mismo catálogo</h2>
+            <p className="section-head__body">
+              Cada pieza está clasificada por intención, para que encuentres
+              exactamente lo que tu momento necesita — y no dejes de
+              descubrir lo nuevo que se va grabando.
+            </p>
+          </div>
+
+          <div className="cat-grid">
+            {CATEGORIES.map((cat) => (
+              <div
+                key={cat.key}
+                className={cat.wide ? "cat cat--wide reveal" : "cat reveal"}
+              >
+                <CategoryIcon name={cat.key} />
+                <div className="cat__txt">
+                  <h3>{cat.name}</h3>
+                  <p>{cat.description}</p>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
-      <section className="faq">
+      <section className="quote-band">
         <div className="container">
-          <p className="eyebrow">Preguntas frecuentes</p>
-          <h2 className="faq__title">Antes de que te unas</h2>
-          <div className="faq__list">
-            {FAQ.map(({ q, a }) => (
-              <details key={q} className="faq__item">
-                <summary>{q}</summary>
-                <p>{a}</p>
+          <div className="quote-card reveal">
+            <p className="eyebrow eyebrow--light">Comunidad</p>
+            <div>
+              <blockquote>
+                "Al formar parte de la comunidad, puedes sugerir temas para
+                nuevas meditaciones — y con el tiempo grabo contenido
+                específico para lo que estás trabajando."
+              </blockquote>
+              <cite>
+                Antes de pagar, ya te leemos: tu sugerencia va en el mismo
+                formulario de acceso.
+              </cite>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="faq" id="faq">
+        <div className="container">
+          <div className="section-head reveal">
+            <p className="eyebrow eyebrow--light">Antes de que te unas</p>
+            <h2>Preguntas frecuentes</h2>
+          </div>
+
+          <div className="faq-list reveal">
+            {FAQ.map(({ q, a }, i) => (
+              <details key={q} className="faq-item">
+                <summary>
+                  <span className="faq-item__num">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="faq-item__q">{q}</span>
+                  <span className="faq-item__chev">+</span>
+                </summary>
+                <p className="faq-item__a">{a}</p>
               </details>
             ))}
           </div>
@@ -63,12 +113,10 @@ export default function Landing() {
       </section>
 
       <section className="closing">
-        <div className="container closing__inner">
+        <div className="container closing__inner reveal">
           <h2>Tu acceso te espera</h2>
-          <p>
-            Pago único de ${PRICE_MXN} MXN, acceso ilimitado y permanente.
-          </p>
-          <Link to="/pago" className="btn btn-primary">
+          <p>Pago único de ${PRICE_MXN} MXN · acceso ilimitado y permanente</p>
+          <Link to="/pago" className="btn-white">
             Quiero mi acceso
           </Link>
         </div>

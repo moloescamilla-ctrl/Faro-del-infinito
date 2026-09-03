@@ -54,6 +54,36 @@ export const FAQ = [
   },
 ];
 
+export const CATEGORIES = [
+  {
+    key: "relajacion",
+    name: "Relajación",
+    description: "Para soltar el cuerpo y bajar el ritmo al final del día.",
+  },
+  {
+    key: "enfoque",
+    name: "Enfoque mental",
+    description: "Claridad y concentración para el trabajo profundo.",
+  },
+  {
+    key: "abundancia",
+    name: "Abundancia",
+    description: "Prácticas para soltar bloqueos frente al dinero y la oportunidad.",
+  },
+  {
+    key: "sanacion",
+    name: "Sanación",
+    description: "Acompañamiento para procesar y liberar con suavidad.",
+  },
+  {
+    key: "expansion",
+    name: "Expansión de conciencia",
+    description:
+      "El corazón del catálogo: frecuencias y meditaciones para ampliar la percepción de ti mismo.",
+    wide: true,
+  },
+];
+
 export const CATALOG_ITEMS = [
   "Meditaciones guiadas para relajación, enfoque mental, abundancia, sanación y expansión de conciencia.",
   "Pistas de música binaural y frecuencias terapéuticas, diseñadas para favorecer la concentración, la calma y el equilibrio energético.",
