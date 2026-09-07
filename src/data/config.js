@@ -1,6 +1,6 @@
 // URL del Web App de Google Apps Script (termina en /exec).
-// TODO: reemplazar con la URL real antes de publicar — ver brief sección 5.
-export const APPS_SCRIPT_URL = "APPS_SCRIPT_URL_AQUI";
+export const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbx_yCAeaW7hwTBxycx8esJBUsBtYCFMDdvQ_Ll7D77Wle9f1g2o9H6HkRg6zgX2ufPwFQ/exec";
 
 export const WHATSAPP_NUMBER = "5212721162210";
 export const WHATSAPP_DISPLAY = "272 116 2210";

@@ -1,53 +1,31 @@
 /**
  * Integración de Mercado Pago Checkout Pro para Faro del Infinito.
  *
- * ESTE ARCHIVO ES UNA PIEZA NUEVA PARA FUSIONAR CON TU APPS SCRIPT EXISTENTE.
- * No reemplaza tu script actual — solo agrega dos capacidades:
+ * Este archivo trabaja junto con Code.gs (que trae doGet/doPost, el
+ * dispatcher por "action", y la función otorgarAcceso() compartida).
+ * Pega ambos archivos en el mismo proyecto de Apps Script.
  *
- *   1. Crear una "preferencia" de pago en Mercado Pago y devolver la URL de
- *      checkout (init_point) para redirigir al comprador ahí.
- *   2. Recibir el webhook de Mercado Pago cuando el pago se confirma, y
- *      entonces sí otorgar el acceso (compartir Drive + enviar correo +
- *      registrar en el Sheet) — usando la MISMA lógica que ya tienes para
- *      el flujo de comprobante manual.
- *
- * ─────────────────────────────────────────────────────────────────────────
- * CÓMO INTEGRAR CON TU doPost() EXISTENTE
- * ─────────────────────────────────────────────────────────────────────────
- * Tu Web App solo puede tener un doPost(e). Si ya tienes uno que procesa el
- * formulario con comprobante, conviértelo en un dispatcher por "action":
- *
- *   function doPost(e) {
- *     var action = e.parameter.action;
- *     if (action === 'crear_preferencia_mp') return crearPreferenciaMP(e);
- *     return manejarFormularioComprobante(e); // tu lógica actual, renombrada
- *   }
- *
- *   function doGet(e) {
- *     if (e.parameter.topic || e.parameter.type) return recibirWebhookMP(e);
- *     return ContentService.createTextOutput('OK');
- *   }
+ * Aporta dos capacidades:
+ *   1. crearPreferenciaMP(): crea una "preferencia" de pago en Mercado Pago
+ *      y devuelve la URL de checkout (init_point) para redirigir ahí al
+ *      comprador.
+ *   2. recibirWebhookMP(): recibe la notificación de Mercado Pago cuando el
+ *      pago se confirma, VERIFICA el estado real contra la API de MP (nunca
+ *      confía en el webhook a ciegas), y llama a otorgarAcceso() — la misma
+ *      función que usa el flujo de comprobante manual en Code.gs.
  *
  * ─────────────────────────────────────────────────────────────────────────
- * CONFIGURACIÓN REQUERIDA (Project Settings → Script Properties)
+ * PENDIENTE al desplegar:
  * ─────────────────────────────────────────────────────────────────────────
- *   MP_ACCESS_TOKEN   → tu Access Token de Mercado Pago (TEST-... para
- *                        pruebas, luego el de producción). NUNCA lo pongas
- *                        directo en el código — usa Script Properties.
- *
- * ─────────────────────────────────────────────────────────────────────────
- * TODOs que debes resolver al fusionar esto con tu script real:
- * ─────────────────────────────────────────────────────────────────────────
- *   - otorgarAcceso(): debe llamar tu función real que comparte la carpeta
- *     de Drive, envía el correo de bienvenida y registra la fila en el
- *     Sheet. Está marcada abajo con TODO.
  *   - WEBAPP_URL: la URL /exec de tu Web App publicado (para notification_url).
+ *     La sabrás hasta DESPUÉS del primer despliegue — actualízala y vuelve
+ *     a desplegar.
  *   - BACK_URL_CONFIRMACION: la URL real de tu página de confirmación.
  */
 
 var MP_API_BASE = 'https://api.mercadopago.com';
-var WEBAPP_URL = 'https://script.google.com/macros/s/TU_SCRIPT_ID_AQUI/exec'; // TODO
-var BACK_URL_CONFIRMACION = 'https://farodelinfinito.mx/confirmacion'; // TODO
+var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbx_yCAeaW7hwTBxycx8esJBUsBtYCFMDdvQ_Ll7D77Wle9f1g2o9H6HkRg6zgX2ufPwFQ/exec';
+var BACK_URL_CONFIRMACION = 'https://faro-del-infinito.vercel.app/confirmacion';
 var PRECIO_MXN = 99;
 
 /**
@@ -155,35 +133,26 @@ function recibirWebhookMP(e) {
     return ContentService.createTextOutput('sin correo, no se puede otorgar acceso');
   }
 
+  // Mercado Pago reintenta el webhook varias veces para el mismo pago —
+  // sin este chequeo se duplicarían el correo y el acceso otorgado.
+  if (pagoYaProcesado(paymentId)) {
+    return ContentService.createTextOutput('ya procesado: ' + paymentId);
+  }
+
+  // otorgarAcceso() vive en Code.gs — el pago ya está verificado por MP
+  // (status === 'approved'), así que este acceso NO pasa por revisión manual.
   otorgarAcceso({
     nombre: nombre,
     correo: correo,
     sugerencia: sugerencia,
     monto: pago.transaction_amount,
     metodo: 'Mercado Pago (' + pago.payment_type_id + ')',
+    origen: 'Mercado Pago',
+    estado: 'Verificado',
     mpPaymentId: paymentId,
   });
 
   return ContentService.createTextOutput('ok');
-}
-
-/**
- * TODO: reemplaza el cuerpo de esta función con tu lógica real existente:
- *   - Compartir la carpeta de Drive con `datos.correo` (solo lectura)
- *   - Enviar el correo de bienvenida con el enlace
- *   - Registrar la fila en el Sheet (fecha, nombre, correo, monto, método,
- *     sugerencia, estado = "pagado vía Mercado Pago")
- * Con Mercado Pago Checkout Pro el pago YA está verificado por MP antes de
- * llegar aquí, así que este acceso no necesita pasar por tu revisión manual
- * de comprobante — pero puedes seguir registrándolo en el mismo Sheet para
- * tener todo en un solo lugar.
- */
-function otorgarAcceso(datos) {
-  Logger.log('TODO: otorgar acceso — %s', JSON.stringify(datos));
-  // Ejemplo de la forma en que probablemente ya tengas esto:
-  // compartirCarpetaDrive(datos.correo);
-  // enviarCorreoBienvenida(datos.correo, datos.nombre);
-  // registrarEnSheet(datos);
 }
 
 function jsonResponse(obj, status) {
