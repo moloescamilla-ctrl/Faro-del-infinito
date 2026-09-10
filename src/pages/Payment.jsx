@@ -148,10 +148,6 @@ export default function Payment() {
                 <dt>CLABE</dt>
                 <dd>{PAYMENT_METHODS.mercadoPago.clabe}</dd>
               </div>
-              <div>
-                <dt>Beneficiario</dt>
-                <dd>{PAYMENT_METHODS.mercadoPago.beneficiario}</dd>
-              </div>
             </dl>
           </div>
 

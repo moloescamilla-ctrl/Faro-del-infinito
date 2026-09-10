@@ -26,6 +26,10 @@ html,
 body {
   padding: 0;
   margin: 0;
+  /* Respaldo: ningún elemento debería causar scroll horizontal, pero si
+     algo se desborda por error, que no rompa la página en móvil. */
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {

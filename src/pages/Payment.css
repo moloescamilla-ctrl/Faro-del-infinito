@@ -10,6 +10,13 @@
   align-items: start;
 }
 
+/* Los ítems de grid no se encogen por debajo del ancho mínimo de su
+   contenido por defecto (ej. el input de archivo nativo) — esto se lo
+   permite, para que la columna sí respete el viewport en móvil. */
+.payment__layout > * {
+  min-width: 0;
+}
+
 .payment__intro h1 {
   font-size: clamp(26px, 3.2vw, 34px);
   margin-top: 8px;
@@ -163,6 +170,8 @@
 .field input,
 .field select,
 .field textarea {
+  width: 100%;
+  max-width: 100%;
   font: inherit;
   font-weight: 400;
   padding: 11px 14px;

@@ -11,7 +11,6 @@ export const PAYMENT_METHODS = {
   mercadoPago: {
     label: "Mercado Pago",
     clabe: "722969069509993670",
-    beneficiario: "José Manuel Mateos Escamilla",
   },
   oxxoEfectivo: {
     label: "OXXO — depósito en efectivo",
