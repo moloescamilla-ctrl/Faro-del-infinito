@@ -45,24 +45,6 @@
   font-size: 14px;
 }
 
-.navcta {
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  padding: 9px 18px;
-  border-radius: 999px;
-  text-decoration: none;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.navcta:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: #fff;
-}
-
 @media (max-width: 480px) {
   .brand-logo {
     height: 32px;
@@ -70,8 +52,7 @@
   .brand__word {
     font-size: 16px;
   }
-  .header-cta,
-  .navcta {
+  .header-cta {
     padding: 8px 14px;
     font-size: 13px;
   }

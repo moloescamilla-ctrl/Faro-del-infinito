@@ -13,11 +13,7 @@ export default function Header({ overlay = false }) {
             <span className="brand__word">Faro del Infinito</span>
           )}
         </Link>
-        {overlay ? (
-          <Link to="/pago" className="navcta">
-            Quiero mi acceso
-          </Link>
-        ) : (
+        {!overlay && (
           <Link to="/pago" className="btn btn-primary header-cta">
             Quiero mi acceso
           </Link>
