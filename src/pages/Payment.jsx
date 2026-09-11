@@ -219,7 +219,7 @@ export default function Payment() {
           </div>
 
           <label className="field">
-            <span>Comprobante de pago</span>
+            <span>Envíanos impresión de pantalla o una foto de tu comprobante de pago</span>
             <input
               type="file"
               name="comprobante"
