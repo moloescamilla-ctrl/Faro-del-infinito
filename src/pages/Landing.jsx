@@ -20,9 +20,6 @@ export default function Landing() {
       <section className="hero">
         <Header overlay />
         <div className="container hero__inner">
-          <p className="eyebrow eyebrow--light">
-            Catálogo digital · pago único ${PRICE_MXN} MXN
-          </p>
           <h1 className="hero__title">Un espacio de calma que crece contigo</h1>
           <p className="hero__subtitle">
             Meditaciones guiadas y música binaural grabadas por mí, organizadas

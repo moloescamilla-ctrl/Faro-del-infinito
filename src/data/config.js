@@ -36,8 +36,8 @@ export const FAQ = [
     a: "El acceso incluye un catálogo en crecimiento de meditaciones guiadas, organizado por categorías para facilitar tu práctica.",
   },
   {
-    q: "¿Por qué el precio no sube aunque agreguen más contenido?",
-    a: "Porque tu acceso es permanente: cada meditación o pista nueva que grabe se suma automáticamente a tu catálogo, sin que tengas que pagar de nuevo.",
+    q: "¿El catálogo sigue creciendo con el tiempo?",
+    a: "Sí. Tu acceso es permanente, así que cada meditación o pista nueva que grabe se suma automáticamente a tu catálogo — siempre tienes contenido fresco esperándote, sin que tengas que hacer nada.",
   },
   {
     q: "¿Puedo sugerir temas para nuevas meditaciones?",

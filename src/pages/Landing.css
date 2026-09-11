@@ -67,7 +67,6 @@
 }
 
 .hero__title {
-  margin-top: 18px;
   font-size: clamp(36px, 6vw, 64px);
   color: #fff;
   text-shadow: 0 3px 30px rgba(0, 0, 0, 0.4);
