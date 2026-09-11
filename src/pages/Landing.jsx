@@ -30,9 +30,6 @@ export default function Landing() {
             bienestar.
           </p>
           <div className="hero__ctas">
-            <Link to="/pago" className="btn-white">
-              Quiero mi acceso <span className="btn-white__price">— ${PRICE_MXN} MXN</span>
-            </Link>
             <a href="#faq" className="link-ghost">
               Ver preguntas frecuentes
             </a>
