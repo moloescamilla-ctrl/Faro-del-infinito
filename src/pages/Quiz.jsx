@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import RadarChart from "../components/RadarChart.jsx";
@@ -21,20 +21,31 @@ export default function Quiz() {
   const [step, setStep] = useState(0); // 0..TOTAL-1 preguntas, TOTAL = resultado
   const [scores, setScores] = useState(emptyScores);
   const [answered, setAnswered] = useState([]);
+  const [selectedKey, setSelectedKey] = useState(null);
+  const advanceTimeoutRef = useRef(null);
+
+  useEffect(() => () => clearTimeout(advanceTimeoutRef.current), []);
 
   const isResult = step >= TOTAL;
   const progress = Math.min(step, TOTAL) / TOTAL;
 
   function selectOption(key, event) {
+    if (selectedKey) return; // ya hay una selección en curso
     event.currentTarget.blur();
-    const next = { ...scores, [key]: (scores[key] || 0) + 1 };
-    setScores(next);
-    setAnswered((a) => [...a, key]);
-    setStep((s) => s + 1);
+    setSelectedKey(key);
+
+    advanceTimeoutRef.current = setTimeout(() => {
+      setScores((s) => ({ ...s, [key]: (s[key] || 0) + 1 }));
+      setAnswered((a) => [...a, key]);
+      setStep((s) => s + 1);
+      setSelectedKey(null);
+    }, 1000);
   }
 
   function goBack() {
     if (step === 0) return;
+    clearTimeout(advanceTimeoutRef.current);
+    setSelectedKey(null);
     const lastKey = answered[answered.length - 1];
     setScores((s) => ({ ...s, [lastKey]: s[lastKey] - 1 }));
     setAnswered((a) => a.slice(0, -1));
@@ -42,6 +53,8 @@ export default function Quiz() {
   }
 
   function restart() {
+    clearTimeout(advanceTimeoutRef.current);
+    setSelectedKey(null);
     setScores(emptyScores());
     setAnswered([]);
     setStep(0);
@@ -75,7 +88,12 @@ export default function Quiz() {
                   <button
                     key={opt.key}
                     type="button"
-                    className="quiz__option"
+                    className={
+                      selectedKey === opt.key
+                        ? "quiz__option quiz__option--selected"
+                        : "quiz__option"
+                    }
+                    disabled={Boolean(selectedKey)}
                     onClick={(e) => selectOption(opt.key, e)}
                   >
                     {opt.label}

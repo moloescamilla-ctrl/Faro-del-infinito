@@ -81,6 +81,19 @@
   transform: translateX(4px) scale(0.99);
 }
 
+.quiz__option:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.quiz__option.quiz__option--selected {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+  color: #fff;
+  transform: translateX(4px);
+  box-shadow: 0 10px 24px -10px rgba(76, 54, 120, 0.55);
+}
+
 .quiz__back {
   margin-top: 28px;
   background: none;
