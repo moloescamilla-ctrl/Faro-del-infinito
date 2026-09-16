@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import RadarChart from "../components/RadarChart.jsx";
@@ -15,6 +15,15 @@ function topCategoryKey(scores) {
   return CATEGORIES.reduce((best, cat) =>
     scores[cat.key] > scores[best.key] ? cat : best,
   ).key;
+}
+
+function shuffled(array) {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
 }
 
 export default function Quiz() {
@@ -39,7 +48,7 @@ export default function Quiz() {
       setAnswered((a) => [...a, key]);
       setStep((s) => s + 1);
       setSelectedKey(null);
-    }, 1000);
+    }, 500);
   }
 
   function goBack() {
@@ -63,6 +72,14 @@ export default function Quiz() {
   const topKey = isResult ? topCategoryKey(scores) : null;
   const result = topKey ? QUIZ_RESULTS[topKey] : null;
 
+  // Mezcla el orden de las opciones por pregunta, para que la posición
+  // del botón no siempre coincida con la misma categoría — así el mapa
+  // final no depende de "elegir siempre la primera opción".
+  const options = useMemo(
+    () => (isResult ? [] : shuffled(QUIZ_QUESTIONS[step].options)),
+    [step, isResult],
+  );
+
   return (
     <div className="quiz">
       <Header />
@@ -84,7 +101,7 @@ export default function Quiz() {
             <div className="quiz__question">
               <h1>{QUIZ_QUESTIONS[step].q}</h1>
               <div className="quiz__options">
-                {QUIZ_QUESTIONS[step].options.map((opt) => (
+                {options.map((opt) => (
                   <button
                     key={opt.key}
                     type="button"
