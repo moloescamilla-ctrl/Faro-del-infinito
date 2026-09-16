@@ -25,7 +25,8 @@ export default function Quiz() {
   const isResult = step >= TOTAL;
   const progress = Math.min(step, TOTAL) / TOTAL;
 
-  function selectOption(key) {
+  function selectOption(key, event) {
+    event.currentTarget.blur();
     const next = { ...scores, [key]: (scores[key] || 0) + 1 };
     setScores(next);
     setAnswered((a) => [...a, key]);
@@ -75,7 +76,7 @@ export default function Quiz() {
                     key={opt.key}
                     type="button"
                     className="quiz__option"
-                    onClick={() => selectOption(opt.key)}
+                    onClick={(e) => selectOption(opt.key, e)}
                   >
                     {opt.label}
                   </button>

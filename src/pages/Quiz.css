@@ -66,10 +66,15 @@
     box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.quiz__option:hover {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  transform: translateX(4px);
+/* Solo aplica :hover en dispositivos con puntero real — en touch, el
+   estilo de hover se queda "pegado" en el botón tocado tras el cambio
+   de pregunta, porque el navegador simula el hover al tocar. */
+@media (hover: hover) and (pointer: fine) {
+  .quiz__option:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateX(4px);
+  }
 }
 
 .quiz__option:active {
