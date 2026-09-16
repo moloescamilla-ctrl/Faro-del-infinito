@@ -3,6 +3,7 @@ import ScrollToTop from "./components/ScrollToTop.jsx";
 import WhatsAppButton from "./components/WhatsAppButton.jsx";
 import AudioPlayer from "./components/AudioPlayer.jsx";
 import Landing from "./pages/Landing.jsx";
+import Quiz from "./pages/Quiz.jsx";
 import Payment from "./pages/Payment.jsx";
 import Confirmation from "./pages/Confirmation.jsx";
 
@@ -12,6 +13,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/test" element={<Quiz />} />
         <Route path="/pago" element={<Payment />} />
         <Route path="/confirmacion" element={<Confirmation />} />
       </Routes>

@@ -83,6 +83,85 @@ export const CATEGORIES = [
   },
 ];
 
+// Resultado personalizado del quiz por categoría — headline + mensaje corto
+// que aparece en la pantalla de resultado, enmarcado como enfoque/beneficio,
+// nunca como diagnóstico clínico.
+export const QUIZ_RESULTS = {
+  relajacion: {
+    headline: "Tu enfoque ahora mismo: Relajación",
+    body: "Tu cuerpo te está pidiendo una pausa real. Lo que buscas es una meditación guiada para soltar la tensión acumulada y bajar el ritmo — no solo distraerte un rato.",
+  },
+  enfoque: {
+    headline: "Tu enfoque ahora mismo: Enfoque mental",
+    body: "Necesitas claridad, no más ruido. Una meditación guiada que entrene tu atención te va a ayudar a sostener la concentración cuando más lo necesitas.",
+  },
+  abundancia: {
+    headline: "Tu enfoque ahora mismo: Abundancia",
+    body: "Hay bloqueos frente al dinero y la oportunidad que vale la pena trabajar de raíz. Una meditación guiada ayuda a soltar esas creencias, no solo a \"pensar en positivo\".",
+  },
+  sanacion: {
+    headline: "Tu enfoque ahora mismo: Sanación",
+    body: "Hay algo del pasado que sigues cargando. Procesarlo con suavidad, acompañado de una voz que te guíe, suele doler menos que hacerlo solo.",
+  },
+  expansion: {
+    headline: "Tu enfoque ahora mismo: Expansión de conciencia",
+    body: "Buscas algo más grande que la rutina diaria. Esta es la meditación que amplía la manera en que te percibes a ti mismo y al mundo.",
+  },
+};
+
+export const QUIZ_QUESTIONS = [
+  {
+    q: "¿Cómo describirías tu mente en un día normal?",
+    options: [
+      { label: "Acelerada, sin poder desconectar", key: "enfoque" },
+      { label: "Tensa, cargando el estrés en el cuerpo", key: "relajacion" },
+      { label: "Preocupada por el dinero o el futuro", key: "abundancia" },
+      { label: "Regresando a recuerdos que pesan", key: "sanacion" },
+      { label: "Buscando un sentido más grande a las cosas", key: "expansion" },
+    ],
+  },
+  {
+    q: "¿Qué te gustaría sentir al terminar el día?",
+    options: [
+      { label: "Claridad y enfoque para lo que sigue", key: "enfoque" },
+      { label: "El cuerpo relajado, sin tensión", key: "relajacion" },
+      { label: "Confianza en que las cosas van a fluir", key: "abundancia" },
+      { label: "Ligereza, como si hubieras soltado algo", key: "sanacion" },
+      { label: "Más conexión contigo mismo, más presente", key: "expansion" },
+    ],
+  },
+  {
+    q: "¿Qué obstáculo sientes que se repite más en tu vida?",
+    options: [
+      { label: "Distracción, cuesta concentrarme", key: "enfoque" },
+      { label: "Estrés físico, dormir mal", key: "relajacion" },
+      { label: "Bloqueos con el dinero o las oportunidades", key: "abundancia" },
+      { label: "Heridas o situaciones del pasado sin resolver", key: "sanacion" },
+      { label: "Sentir que voy en automático, sin conciencia", key: "expansion" },
+    ],
+  },
+  {
+    q: "Si tuvieras 10 minutos solo para ti, ¿qué elegirías?",
+    options: [
+      { label: "Silencio para ordenar mis pensamientos", key: "enfoque" },
+      { label: "Descansar el cuerpo por completo", key: "relajacion" },
+      { label: "Visualizar mis metas con claridad", key: "abundancia" },
+      { label: "Procesar algo que traigo pendiente", key: "sanacion" },
+      { label: "Meditar sin buscar nada en particular", key: "expansion" },
+    ],
+  },
+  {
+    q: "¿Qué te trajo hasta aquí hoy?",
+    options: [
+      { label: "Necesito concentrarme mejor", key: "enfoque" },
+      { label: "Necesito relajarme, estoy agotado/a", key: "relajacion" },
+      { label: "Quiero atraer más abundancia a mi vida", key: "abundancia" },
+      { label: "Quiero sanar algo que llevo cargando", key: "sanacion" },
+      { label: "Busco expandir mi conciencia y crecer", key: "expansion" },
+    ],
+  },
+];
+
 export const CATALOG_ITEMS = [
   "Meditaciones guiadas para relajación, enfoque mental, abundancia, sanación y expansión de conciencia.",
   "Pistas de música binaural y frecuencias terapéuticas, diseñadas para favorecer la concentración, la calma y el equilibrio energético.",

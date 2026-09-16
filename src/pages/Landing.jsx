@@ -27,9 +27,9 @@ export default function Landing() {
             bienestar.
           </p>
           <div className="hero__ctas">
-            <a href="#faq" className="link-ghost">
-              Ver preguntas frecuentes
-            </a>
+            <Link to="/test" className="link-ghost">
+              Descubre qué necesitas ahora →
+            </Link>
           </div>
         </div>
       </section>
